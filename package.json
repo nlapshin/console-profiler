@@ -1,0 +1,29 @@
+{
+  "name": "console-profiler",
+  "version": "1.0.0",
+  "description": "Simple runtime profiler based on the console module",
+  "main": "index.js",
+  "keywords": [
+    "console",
+    "profiler",
+    "console.time"
+  ],
+  "scripts": {
+    "test": "npm mocha ./spec.js"
+  },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
+  "author": "Nikolay Lapshin <nlapshin1989@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.3.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "pre-commit": "^1.2.2",
+    "sinon": "^7.1.1"
+  }
+}
