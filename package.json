@@ -15,6 +15,10 @@
     "lint",
     "test"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nlapshin/console-profiler.git"
+  },
   "author": "Nikolay Lapshin <nlapshin1989@gmail.com>",
   "license": "MIT",
   "dependencies": {
