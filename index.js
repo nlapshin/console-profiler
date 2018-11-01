@@ -1,4 +1,6 @@
-const colors = require("colors");
+const { performance } = require('perf_hooks');
+
+require("colors");
 
 module.exports = class Console {
   constructor(opts = {}) {
@@ -8,39 +10,39 @@ module.exports = class Console {
       time: "green"
     };
 
-    this.opts = Object.assign({ threshold: 0, namespace: "console:time" }, opts);
+    this.opts = Object.assign({ threshold: 0, namespace: "console:time", test: false, fixed: 2 }, opts);
 
     this._tags = {};
   }
 
-  time(name) {
-    this._tags[name] = {};
-    this._tags[name].start = performance.now();
+  time(tag) {
+    this._tags[tag] = {};
+    this._tags[tag].start = performance.now();
   }
 
-  timeEnd(name) {
-    this._tags[name].end = performance.now();
-    this._showTime(name);
-  }
+  timeEnd(tag) {
+    if (this._tags[tag] === 'undefined') {
+      console.warn(`timeEnd: tag ${tag} wasn't set.`);
 
-  _showTime(name) {
-    let tag = this._tags[name];
-
-    if (!tag) {
-      console.warn("Warning: No such label %s for consoleProfiler.timeEnd", name);
       return;
-    };
+    }
 
-    let time = tag.end - tag.start;
-    let threshold = this.opts.threshold;
-    let namespace = this.opts.namespace;
+    const time = performance.now() - this._tags[tag].start;
+    const threshold = this.opts.threshold;
 
     if (time >= threshold) {
-      let nameLabel = name + ":";
-      let timeLabel = time.toString() + "ms";
+      this._showTime(tag, time);
+    };
+  }
 
+  _showTime(tag, time) {
+    let namespace = this.opts.namespace;
+
+    let nameLabel = tag + ":";
+    let timeLabel = time.toFixed(this.opts.fixed) + "ms";
+
+    if (this.opts.test === false) {
       console.log("  %s %s %s", namespace[this._colors.namespace], nameLabel[this._colors.label], timeLabel[this._colors.time]);
     };
-
   }
 }

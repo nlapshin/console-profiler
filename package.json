@@ -9,7 +9,7 @@
     "console.time"
   ],
   "scripts": {
-    "test": "npm mocha ./spec.js"
+    "test": "npx mocha ./spec.js"
   },
   "pre-commit": [
     "lint",
