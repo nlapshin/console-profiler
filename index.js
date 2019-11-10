@@ -21,7 +21,7 @@ module.exports = class Console {
   }
 
   timeEnd(tag) {
-    if (this._tags[tag] === 'undefined') {
+    if (this._tags[tag] === 'undefined' || this._tags[tag].start === 'undefined') {
       console.warn(`timeEnd: tag ${tag} wasn't set.`);
 
       return;
