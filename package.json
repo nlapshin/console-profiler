@@ -12,7 +12,6 @@
     "test": "npx mocha ./spec.js"
   },
   "pre-commit": [
-    "lint",
     "test"
   ],
   "repository": {

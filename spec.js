@@ -31,6 +31,15 @@ describe('Console', () => {
 
     expect(showTimeSpy.callCount).to.be.equal(0);
   });
+
+  it('it should not show execution time if console time was not called', async () => {
+    const consoleProfile = new Console({ threshold: 150, test: true });
+    const showTimeSpy = sinon.spy(consoleProfile, '_showTime');
+
+    consoleProfile.timeEnd('test');
+
+    expect(showTimeSpy.callCount).to.be.equal(0);
+  });
 });
 
 function delay(time = 100) {
